@@ -5,26 +5,22 @@ import Button from '../Button/Button'
 
 const NavBar = () => {
     return (
-
         <header className={classes.header}>
-            <h2>Bajamar.BA</h2>
+            <h2 className={classes.title}>Bajamar.BA</h2>
             <nav className={classes.ajusteHeader}>
-                <a className={classes.ajusteHeader}>Inicio</a>
-                <a className={classes.ajusteHeader}>Cristaleria</a>
-                <a className={classes.ajusteHeader}>Bebidas</a>
-                <a className={classes.ajusteHeader}>Otros y más</a>
+                <a className={classes.aHeader}>Inicio</a>
+                <a className={classes.aHeader}>Cristaleria</a>
+                <a className={classes.aHeader}>Bebidas</a>
+                <a className={classes.aHeader}>Otros y más</a>
+                <CardWidget className={classes.aHeader} />
             </nav>
-            <CardWidget/>
-        
-        <div >
-            <Button label='Log in' className={classes.ajusteHeader} callback={() => console.log('clic en log in')}/>
-            <Button label='Register' className={classes.ajusteHeader} callback={() => console.log('clic en registrer')} />
-        </div>
-        
+
+            <div >
+                <Button label='Log in' className={classes.buttonHeader} callback={() => console.log('clic en log in')} />
+                <Button label='Register' className={classes.buttonHeader} callback={() => console.log('clic en registrer')} />
+            </div>
         </header>
-        
-            
-            )
+    )
 }
 
 export default NavBar

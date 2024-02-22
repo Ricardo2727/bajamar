@@ -1,18 +1,23 @@
 .header{
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 220px;
+       
 }
 
 .ajusteHeader{
-    padding: 5px;
-    margin: 5px;
-    border: 5px;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .aHeader{
     padding: 5px;
+}
+
+.title{
     margin: 5px;
-    border: 5px;
 }
