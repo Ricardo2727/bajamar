@@ -15,6 +15,7 @@ function App() {
       <ItemListContainer greeting={'Mientras jugá a adivinar nuestro número secreto:'}/>
       <ItemCount initialValue={1} min={0} max={999} nroAdivinar={11}/>
       
+      
     </>
   )
 }
