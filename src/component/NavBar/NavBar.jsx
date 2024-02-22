@@ -12,8 +12,9 @@ const NavBar = () => {
                 <a className={classes.aHeader}>Cristaleria</a>
                 <a className={classes.aHeader}>Bebidas</a>
                 <a className={classes.aHeader}>Otros y más</a>
-                <CardWidget className={classes.aHeader} />
+                
             </nav>
+            <CardWidget className={classes.aHeader} />
 
             <div >
                 <Button label='Log in' className={classes.buttonHeader} callback={() => console.log('clic en log in')} />
