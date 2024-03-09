@@ -6,18 +6,28 @@
        
 }
 
-.ajusteHeader{
-    width: 500px;
+.ajusteHeaderIzq{
+    width: 700px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    justify-content: flex-start;
+    gap: 70px;
+}
+
+.ajusteHeaderDer{
+    width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 70px;
 }
 
 .aHeader{
     padding: 5px;
+    font-size: 20px;
 }
 
 .title{
     margin: 5px;
+    font-size: 32px;
 }
