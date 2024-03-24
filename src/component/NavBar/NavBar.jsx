@@ -11,9 +11,9 @@ const NavBar = () => {
                 <h2 className={classes.title}>Bajamar.BA</h2>
                 <nav>
                     {/* <Link className={classes.aHeader}>Inicio</Link> */}
-                    <Link to='/category/Cocteleria' className={classes.aHeader}>Coctelería</Link>
-                    <Link to='/category/Bebidas' className={classes.aHeader}>Bebidas</Link>
-                    <Link to='/category/Otros' className={classes.aHeader}>Otros y más</Link>
+                    <Link to='/category/Cocteleria' className={classes.aHeader}>COCTELERIA</Link>
+                    <Link to='/category/Bebidas' className={classes.aHeader}>BEBIDAS</Link>
+                    <Link to='/category/Otros' className={classes.aHeader}>OTROS</Link>
                 </nav>
             </div>
             <div className={classes.ajusteHeaderDer}>

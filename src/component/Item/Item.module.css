@@ -1,5 +1,7 @@
 .style{
     border: #FBD631 solid 1px;
+    border-radius: 4px;
     width: 250px;
     padding: 20px;
+    background-color: #5a688fb3;
 }

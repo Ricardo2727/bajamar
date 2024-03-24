@@ -17,11 +17,11 @@ const decrem =() =>{
 }
 
     return(
-        <div>
-            <h3>{count}</h3>
-            <button onClick={decrem} >-</button>
-            <button onClick={()=> onAdd(count)} >Agregar al Carrito</button>
-            <button onClick={increm} >+</button>
+        <div >
+            <h3 >{count}</h3>
+            <button style={{ margin: '5px' }} onClick={decrem} >-</button>
+            <button style={{ margin: '5px' }} onClick={()=> onAdd(count)} >Agregar al Carrito</button>
+            <button style={{ margin: '5px' }} onClick={increm} >+</button>
         </div>
 
     )
