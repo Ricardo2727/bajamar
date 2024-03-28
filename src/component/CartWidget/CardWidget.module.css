@@ -4,4 +4,7 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
+    border-radius: 4px;
+    background-color: #5a688fb3;
+    padding: 7px;
 }

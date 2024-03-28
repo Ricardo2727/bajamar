@@ -1,7 +1,8 @@
 .style{
-    border: #FBD631 solid 1px;
-    border-radius: 4px;
+    /* border: #FBD631 solid 1px; */
+    border: 1px solid #ffe98546;
     width: 250px;
     padding: 20px;
-    background-color: #5a688fb3;
+    border-radius: 4px;
+    background-color: #1c294d8e;
 }

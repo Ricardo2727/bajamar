@@ -1,36 +1,45 @@
 import { useEffect, useState } from 'react'
-import { getProducts, getProductsByCategory } from '../../asyncMock'
 import ItemList from '../ItemList/ItemList'
 import { useParams } from 'react-router-dom'
+import { useNotification } from '../../notification/hooks/useNotification'
+
+import { getDocs, collection, query, where, orderBy } from 'firebase/firestore'
+import { db } from '../../services/firebase/firebaseConfig'
+
 
 
 const ItemListContainer = ({ greeting }) => {
     const [products, setProducts] = useState([])
 
-    const [loading, setLoading] = useState(true)
+    const { categoryId } = useParams()
 
-    const {categoryId} = useParams()
+    const { showNotification } = useNotification()
 
     useEffect(() => {
-        setLoading (true)
-        const asyncFuntion = categoryId ? getProductsByCategory : getProducts
+        
+        const productsCollection = categoryId ? (
+            query(collection(db, 'products'), where('category', '==', categoryId))
+        ) : (
+            query(collection(db, 'products'), orderBy('name', 'asc'))
+        )
+
+        getDocs(productsCollection)
+            .then(QuerySnapshot => {
+                const productsAdapted = QuerySnapshot.docs.map(doc => {
+                    const data = doc.data()
+
+                    return { id: doc.id, ...data }
+                })
+                
+                setProducts(productsAdapted)
+            })
+            .catch(() => {
+                showNotification('error', ' Hubo un error cargado los productos')
+            })
+
+
        
-        asyncFuntion(categoryId)
-            .then(result => {
-                setProducts(result)
-            })
-            .catch(error => {
-                console.log(error) //cada ves que hay un error siempre mostar un msj al usuario
-            })
-            .finally(()=> {
-                setLoading (false)
-            })
     }, [categoryId])
-
-if (loading) {
-    return <h2>Cargando productos...</h2>
- }
-
 
     return (
         <div>
