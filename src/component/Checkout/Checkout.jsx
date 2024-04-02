@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { CartContext } from "../../context/CartContext"
 import { useNotification } from "../../notification/hooks/useNotification"
-import { getDocs, collection, query, where, documentId, writeBatch, addDoc } from "firebase/firestore"
+import { getDocs, collection, query, where, documentId, writeBatch, addDoc, Timestamp } from "firebase/firestore"
 import { db } from "../../services/firebase/firebaseConfig"
 
 const Checkout = () => {
@@ -10,9 +10,10 @@ const Checkout = () => {
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState(null)
     const [userData, setUserData] = useState({
-        name:"",
-        email:"",
-        phone:""
+        name: "",
+        email: "",
+        emailConfirm: "",
+        phone: ""
     })
     const { cart, total, clearCart } = useContext(CartContext)
 
@@ -24,10 +25,20 @@ const Checkout = () => {
         });
     };
 
-    // const createOrder = async (userData) => {
-    const createOrder = async () => {
+    
+    const createOrder = async (e) => {
+
+        e.preventDefault();
+
         try {
             setLoading(true)
+
+            if (userData.email !== userData.emailConfirm) {
+                showNotification('error', 'Los correos electrónicos ingresados no coinciden');
+                setLoading(false); 
+                return; 
+            }
+
             const objOrder = {
                 buyer: {
                     name: userData.name,
@@ -35,7 +46,8 @@ const Checkout = () => {
                     phone: userData.phone
                 },
                 items: cart,
-                total
+                total,
+                date: Timestamp.fromDate(new Date())
             }
 
             const batch = writeBatch(db)
@@ -74,8 +86,8 @@ const Checkout = () => {
                 console.error('Hay productos que no tienen stock disponibles')
             }
         } catch (error) {
-             console.error('Hubo un error en la generacion de la orden')
-             showNotification('error', 'Hubo un error en la generacion de la orden')
+            console.error('Hubo un error en la generacion de la orden')
+            showNotification('error', 'Hubo un error en la generacion de la orden')
         } finally {
             setLoading(false)
         }
@@ -87,74 +99,101 @@ const Checkout = () => {
         return <h1>El id de su orden es: {orderId}</h1>
     }
 
-//     return (
-//         <div>
-//             <h1>Creando Orden de Compra</h1>
-//             {/* <h3>crear formulario para el ingreso de datos</h3> */}
+    
+    const isFormValid = userData.name !== "" && userData.email !== "" && userData.emailConfirm !== "" && userData.phone !== "";
 
-                
+    return (
+        <div >
+            <h1>Creando Orden de Compra</h1>
+            <form onSubmit={createOrder} style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px',
+                alignItems: 'left'
+            }}>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '100px',
+                    justifyContent: 'center',
+                }} >
+                    <label style={{ width: '10px' }} htmlFor="name">Nombre:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={userData.name}
+                        onChange={handleChange}
+                        required
+                        style={{
+                            width: '400px',
+                            fontSize: '18px',
+                        }}
+                    />
+                </div>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '100px',
+                    justifyContent: 'center',
+                }}>
+                    <label style={{ width: '10px' }} htmlFor="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={userData.email}
+                        onChange={handleChange}
+                        required
+                        style={{
+                            width: '400px',
+                            fontSize: '18px'
+                        }}
+                    />
+                </div>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '100px',
+                    justifyContent: 'center',
+                }}>
+                    <label style={{ width: '10px' }} htmlFor="emailConfirm">Confirmar Email:</label>
+                    <input
+                        type="email"
+                        id="emailConfirm"
+                        name="emailConfirm"
+                        value={userData.emailConfirm}
+                        onChange={handleChange}
+                        required
+                        style={{ width: '400px', fontSize: '18px' }}
+                    />
+                </div>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '100px',
+                    justifyContent: 'center',
+                }}>
+                    <label style={{ width: '10px' }} htmlFor="phone">Teléfono:</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={userData.phone}
+                        onChange={handleChange}
+                        required
+                        style={{ width: '400px', fontSize: '18px' }}
+                    />
+                </div>
 
+                <h4>Total de la compra: {total}</h4>
+                <div>
+                    <button style={{ width: '200px' }} type="submit" disabled={!isFormValid}>Generar orden de compra</button>
+                </div>
 
-
-//             <h4>Total de la compra: {total}</h4>
-//             <button onClick={createOrder}>Generar orden de compras</button>
-//         </div>
-//     )
-
-// }
-
-return (
-    <div >
-        <h1>Creando Orden de Compra</h1>
-        <form onSubmit={createOrder} style={{
-            display:'flex', 
-            flexDirection:'column', 
-            gap:'20px',
-            alignItems:'center'}}>
-            <div>
-                <label  htmlFor="name">Nombre:</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={userData.name}
-                    onChange={handleChange}
-                    required
-                    style={{width:'600px', fontSize:'20px'}}
-                />
-            </div>
-            <div>
-                <label  htmlFor="email">Email:</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={userData.email}
-                    onChange={handleChange}
-                    required
-                    style={{width:'600px', fontSize:'20px'}}
-                />
-            </div>
-            <div>
-                <label  htmlFor="phone">Teléfono:</label>
-                <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={userData.phone}
-                    onChange={handleChange}
-                    required
-                    style={{width:'600px', fontSize:'20px'}}
-                />
-            </div>
-            <h4>Total de la compra: {total}</h4>
-            
-                <button type="submit">Generar orden de compra</button>
-            
-            
-        </form>
-    </div>
-);
+            </form>
+        </div>
+    );
 };
 
 export default Checkout

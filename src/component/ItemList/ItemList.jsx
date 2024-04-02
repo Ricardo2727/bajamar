@@ -6,7 +6,7 @@ const ItemList = ({ products }) => {
         <section style={{display: 'flex', flexDirection: 'row', flexWrap:'wrap',gap:'30px', border:'20px', justifyContent: 'space-between'}}>
             {
                 products.map((product) => {
-                    // return <Item key={product.id} name={product.name} img={product.img} price={product.price}/>
+                   
                     return <Item key={product.id} {...product}/>
                 })
             }
