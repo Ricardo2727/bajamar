@@ -4,19 +4,18 @@ import { getFirestore } from 'firebase/firestore'
 
 
  const firebaseConfig = {
-   apiKey: "AIzaSyAOhA21TuK4YM_TmJaRsxtGwr7afVRam-0",
-   authDomain: "backend-bajamar.firebaseapp.com",
-   projectId: "backend-bajamar",
-   storageBucket: "backend-bajamar.appspot.com",
-   messagingSenderId: "235851420527",
-   appId: "1:235851420527:web:df97b550dfc68b9b63ce9a"
+   apiKey: import.meta.env.VITE_apiKey,
+   authDomain: import.meta.env.VITE_authDomain,
+   projectId: import.meta.env.VITE_projectId,
+   storageBucket: import.meta.env.VITE_storageBucket,
+   messagingSenderId: import.meta.env.VITE_messagingSenderId,
+   appId: import.meta.env.VITE_appId,
  };
 
 
 
 
- 
-const app = initializeApp(firebaseConfig);
 
+const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
 
