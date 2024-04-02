@@ -1,7 +1,8 @@
 import { useContext, useState } from "react"
 import { CartContext } from "../../context/CartContext"
 import { useNotification } from "../../notification/hooks/useNotification"
-import { getDocs, collection, query, where, documentId, writeBatch, addDoc, Timestamp } from "firebase/firestore"
+//import { getDocs, collection, query, where, documentId, writeBatch, addDoc, Timestamp } from "firebase/firestore"
+import { getDocs, collection, query, where, documentId, writeBatch, addDoc, Timestamp } from "../../services/firebase/firebaseConfig"
 import { db } from "../../services/firebase/firebaseConfig"
 
 const Checkout = () => {
