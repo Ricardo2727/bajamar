@@ -3,7 +3,8 @@ import CardWidget from '../CartWidget/CardWidget'
 import Button from '../Button/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+//import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query } from '../../services/firebase/firebaseConfig'
 import { db } from '../../services/firebase/firebaseConfig'
 
 const NavBar = () => {
