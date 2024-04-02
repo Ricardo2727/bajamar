@@ -3,7 +3,8 @@ import ItemList from '../ItemList/ItemList'
 import { useParams } from 'react-router-dom'
 import { useNotification } from '../../notification/hooks/useNotification'
 
-import { getDocs, collection, query, where, orderBy } from 'firebase/firestore'
+//import { getDocs, collection, query, where, orderBy } from 'firebase/firestore'
+import { getDocs, collection, query, where, orderBy } from '../../services/firebase/firebaseConfig'
 import { db } from '../../services/firebase/firebaseConfig'
 
 
