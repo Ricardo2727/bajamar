@@ -10,10 +10,10 @@ import { NotificacionProvider } from './notification/NotificationsService'
 import CartView from './component/CartView/CartView'
 import Checkout from './component/Checkout/Checkout'
 
-import { useEffect } from 'react'
-import { collection } from 'firebase/firestore'
-import { db } from './services/firebase/firebaseConfig'
-import { addDoc } from 'firebase/firestore'
+// import { useEffect } from 'react'
+// import { collection } from 'firebase/firestore'
+// import { db } from './services/firebase/firebaseConfig'
+// import { addDoc } from 'firebase/firestore'
 
 
 const App = () => {
